@@ -1,0 +1,14 @@
+PATH
+  remote: ~/code/ruby/tic_tac_doh
+  specs:
+    tic_tac_doh (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  tic_tac_doh!
