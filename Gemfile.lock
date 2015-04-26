@@ -1,7 +1,7 @@
 PATH
-  remote: ~/code/ruby/tic_tac_doh
+  remote: /home/david/code/ruby/tic_tac_doh
   specs:
-    tic_tac_doh (0.1.0)
+    tic_tac_doh (0.1.1)
 
 GEM
   remote: https://rubygems.org/
