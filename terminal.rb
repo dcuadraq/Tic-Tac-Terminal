@@ -20,8 +20,8 @@ module TicTacDoh
       end
     end
 
-    def next_turn
-      binding.pry
+    def next_turn(cell_position)
+      insert_player_move_in_grid(calculate_cell(cell_position))
     end
 
     def who_is_next
@@ -162,15 +162,15 @@ module TicTacDoh
       {row: row, column: column}
     end
 
-    def insert_player_move_in_grid(position, mark)
+    def insert_player_move_in_grid(position)
       return false unless valid_move? position
-      @grid[position[:row]][position[:column]] = mark
+      @grid[position[:row]][position[:column]] = who_is_next[:mark]
       true
     end
 
     def valid_move?(position)
-      return false if position[:row] < 0 || position[:row] > (@grid.length) -1
-      return false if position[:column] < 0 || position[:column] > (@grid.length) -1
+      return false if position[:row] < 0 || position[:row] > (@grid.length) - 1
+      return false if position[:column] < 0 || position[:column] > (@grid.length) - 1
       return false unless @grid[position[:row]][position[:column]].is_a? Numeric
       true
 
@@ -235,7 +235,16 @@ module TicTacToe
       end
     end
 
-    def add_player()
+    def play
+      until @game.game_over
+        clear_screen
+        print_grid
+        puts "#{@game.who_is_next[:nickname]}'s turn"
+        next_turn
+      end
+    end
+
+    def add_player
       player_number = @game.players.count + 1
       puts "Player #{player_number}: nickname"
       nickname = gets.chomp
@@ -245,10 +254,7 @@ module TicTacToe
     end
 
     def next_turn
-      clear_screen
-      print_grid
-      puts "#{@game.who_is_next[:nickname]}'s turn"
-      @game.next_turn
+      @game.next_turn(gets.chomp.to_i)
     end
 
     def set_board_size
@@ -287,9 +293,3 @@ module TicTacToe
 end
 
 TicTacToe::Terminal.new
-
-# Set players
-# Game over?
-  # Next turn
-
-# Who is next?
